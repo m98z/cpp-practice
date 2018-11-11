@@ -51,13 +51,19 @@ public:
 		return -1;
 	}
 
-	void expandList(int s) {
+	void expandList(ListShapes& sh, int s) {
+		ListShapes tempsh(s);
+		for (int i = 0; i < sh.count; i++)
+			tempsh.shapes[i] = sh.shapes[i];
 		
+		tempsh.count = sh.count;
+		sh.~ListShapes();
+		sh = tempsh;
 	}
 
 	void addShape(Shape* sh) {
 		if (count == size)
-			expandList( 2 * size);
+			expandList(this, 2 * size);
 		insert(sh, count);
 	}
 
