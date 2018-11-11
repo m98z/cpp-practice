@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 #include<math.h>
 
 using namespace std;
@@ -9,13 +10,39 @@ using namespace std;
 int power(int b,int t);
 
 class Shape{
-protected:
+private:
     double area;
 public:
+    friend  class ListShapes;
     virtual double Area()=0;
     virtual void   Draw()=0;
 };
 
+class ListShapes{
+private:
+    typedef vector<Shape*> Itemlist;
+    typedef  Itemlist::iterator  ItemIterator;
+    Itemlist list;
+public:
+    void  addShape(Shape* sh){
+        list.push_back(sh);
+    }
+    int FindShape(Shape* sh){
+        ItemIterator itemItr;
+        itemItr = std::find(list.begin(), list.end(), *sh);
+        if (itemItr != list.end()) {
+           cout<<"Shape found at position: "<<itemItr - list.begin()+1<<endl;
+           return itemItr - list.begin()+1;
+        }
+        else {
+           cout<<"Shape not found!"<<endl;
+           return -1;
+        }
+    }
+    int RemoveShape(Shape* sh){
+
+    }
+};
 class Circle:public Shape{
 private:
     double radius;
