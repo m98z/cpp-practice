@@ -52,7 +52,12 @@ public:
 	}
 
 	void expandList(int s) {
-		
+		Shape** sh = new Shape*[s];
+		for (int i = 0; i < count; i++) {
+			sh[i] = this->shapes[i];
+		}
+		this->shapes = sh;
+		this->size = s;
 	}
 
 	void addShape(Shape* sh) {
