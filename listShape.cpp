@@ -10,7 +10,7 @@ using namespace std;
 int power(int b,int t);
 
 class Shape{
-private:
+protected:
     double area;
 public:
     friend  class ListShapes;
